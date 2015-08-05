@@ -1,3 +1,6 @@
+import requests
+
+
 def input_file(filename):
     """
     Return username list, assuming on username per line.
@@ -18,5 +21,9 @@ def streak_data(username):
     """
     Read username's streak data from Github.
     """
+    url = 'https://github.com/users/{}/contributions'.format(username)
+    r = requests.get(url)
+    r.text
+    print(r.text)
     return 5
 
