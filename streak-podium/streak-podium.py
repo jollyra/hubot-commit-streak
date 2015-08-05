@@ -26,12 +26,23 @@ def gather_usernames(args):
 
 
 def main():
-    print('Running Streak Podium')
     args = setup_args()
 
-    usernames = gather_usernames(args)
-    print('Usernames: {}'.format(usernames))
+    print('Running Streak Podium')
+    print('---------------------')
 
+    kind = 'file' if args.file else 'Github org'
+    name = args.file if args.file else args.org
+    print('Input is {} [{}]'.format(kind, name))
+
+    print('Gathering usernames...')
+    usernames = gather_usernames(args)
+    print('\tfound {} usernames'.format(len(usernames)))
+
+    print('Reading streaks...')
+    streaks = [read.streak_data(username) for username in usernames]
+
+    print('\tfound {} streaks'.format(len(streaks)))
 
 if __name__ == '__main__':
     main()

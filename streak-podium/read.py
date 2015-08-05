@@ -11,5 +11,12 @@ def org_members(org_name):
     Return all members from a Github organization.
     """
     # TODO: Return github org members, not a placeholder
-    return ['supermitch']
+    return ['supermitch', 'Jollyra']
+
+
+def streak_data(username):
+    """
+    Read username's streak data from Github.
+    """
+    return 5
 
