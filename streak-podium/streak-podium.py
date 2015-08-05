@@ -10,6 +10,7 @@ def setup_args():
     parser = argparse.ArgumentParser('Streak Podium')
     parser.add_argument('-f', '--file', help='member list input filename')
     parser.add_argument('-o', '--org', help='organization to sort')
+    parser.add_argument('-l', '--limit', type=int, help='limit number of users', default=5)
     return parser.parse_args()
 
 
@@ -34,13 +35,14 @@ def main():
     kind = 'file' if args.file else 'Github org'
     name = args.file if args.file else args.org
     print('Input is {} [{}]'.format(kind, name))
+    print('\tlimiting to is {} streaks'.format(args.limit))
 
     print('Gathering usernames...')
     usernames = gather_usernames(args)
     print('\tfound {} usernames'.format(len(usernames)))
 
     print('Reading streaks...')
-    streaks = [read.streak_data(username) for username in usernames]
+    streaks = [read.streak_data(username) for username in usernames[:args.limit]]
 
     print('\tfound {} streaks'.format(len(streaks)))
 
