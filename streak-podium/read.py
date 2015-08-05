@@ -17,13 +17,11 @@ def org_members(org_name):
     return ['supermitch', 'Jollyra']
 
 
-def streak_data(username):
+def svg_data(username):
     """
     Read username's streak data from Github.
     """
     url = 'https://github.com/users/{}/contributions'.format(username)
     r = requests.get(url)
-    r.text
-    print(r.text)
-    return 5
+    return r.text
 

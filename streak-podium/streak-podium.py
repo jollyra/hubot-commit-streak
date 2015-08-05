@@ -1,5 +1,6 @@
 import argparse
 
+import parse
 import read
 
 
@@ -42,7 +43,9 @@ def main():
     print('\tfound {} usernames'.format(len(usernames)))
 
     print('Reading streaks...')
-    streaks = [read.streak_data(username) for username in usernames[:args.limit]]
+    svgs = (read.svg_data(username) for username in usernames[:args.limit])
+
+    streaks = [parse.extract_streaks(svg) for svg in svgs]
 
     print('\tfound {} streaks'.format(len(streaks)))
 
