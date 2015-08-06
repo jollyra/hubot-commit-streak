@@ -25,6 +25,11 @@ def svg_data(username):
     for a specific username.
     """
     url = 'https://github.com/users/{}/contributions'.format(username)
-    r = requests.get(url)
+    try:
+        r = requests.get(url)
+    except requests.exceptions.ConnectionError:
+        logging.warn('Connection error trying to get url: [{}]'.format(url))
+        return None
+
     return r.text
 
