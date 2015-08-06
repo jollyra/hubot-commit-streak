@@ -7,6 +7,8 @@ def extract_commits(svg):
     """
     Extract current and longest streak from svg content.
     """
+    if svg is None:
+        return []
     year_of_commits = []
     columns = etree.fromstring(svg).find('g').getchildren()
     for column in columns:
