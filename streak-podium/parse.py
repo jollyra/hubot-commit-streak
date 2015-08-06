@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from lxml import etree
 
 
@@ -16,7 +18,7 @@ def extract_commits(svg):
     return year_of_commits
 
 
-def find_best_streak(year_of_commits):
+def _best_streak(year_of_commits):
     """
     Return our longest streak in days, given a yeare of commits.
     """
@@ -32,7 +34,7 @@ def find_best_streak(year_of_commits):
     return best
 
 
-def find_latest_streak(year_of_commits):
+def _latest_streak(year_of_commits):
     """
     Return our most recent streak in days, given a year of commits.
     """
@@ -42,4 +44,12 @@ def find_latest_streak(year_of_commits):
             latest += 1
         else:
             return latest
+
+
+def find_streaks(commits):
+    """
+    Return a namedtuple of best & latest streaks, given a year of commits.
+    """
+    Streak = namedtuple('Streak', 'best, latest')
+    return Streak(_best_streak(commits), _latest_streak(commits))
 

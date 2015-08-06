@@ -46,7 +46,7 @@ def main():
     svgs = (read.svg_data(username) for username in usernames[:args.limit])
 
     commits = (parse.extract_commits(svg) for svg in svgs)
-    streaks = [(parse.find_best_streak(x), parse.find_latest_streak(x)) for x in commits]
+    streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
 
     print('\tfound {} streaks'.format(len(streaks)))
     print(streaks)
