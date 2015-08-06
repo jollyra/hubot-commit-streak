@@ -45,9 +45,12 @@ def main():
     print('Reading streaks...')
     svgs = (read.svg_data(username) for username in usernames[:args.limit])
 
-    streaks = [parse.extract_streaks(svg) for svg in svgs]
+    commits = (parse.extract_commits(svg) for svg in svgs)
+    streaks = [(parse.find_best_streak(x), parse.find_latest_streak(x)) for x in commits]
 
     print('\tfound {} streaks'.format(len(streaks)))
+    print(streaks)
+
 
 if __name__ == '__main__':
     main()
