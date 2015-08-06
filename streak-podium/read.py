@@ -4,7 +4,7 @@ import requests
 def input_file(filename):
     """
     Read a file and return list of usernames.
-    
+
     Assumes one username per line and ignores blank lines.
     """
     with open(filename, 'r') as f:

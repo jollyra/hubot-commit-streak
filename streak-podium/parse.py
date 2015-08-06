@@ -21,8 +21,8 @@ def find_best_streak(year_of_commits):
     Return our longest streak in days, given a yeare of commits.
     """
     best = 0
+    streak = 0
     for commits in year_of_commits:
-        streak = 0
         if commits > 0:
             streak += 1
         else:
