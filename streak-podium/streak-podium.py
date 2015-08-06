@@ -36,7 +36,7 @@ def main():
     kind = 'file' if args.file else 'Github org'
     name = args.file if args.file else args.org
     print('Input is {} [{}]'.format(kind, name))
-    print('\tlimiting to is {} streaks'.format(args.limit))
+    print('\tlimiting query to {} users'.format(args.limit))
 
     print('Gathering usernames...')
     usernames = gather_usernames(args)
@@ -49,7 +49,12 @@ def main():
     streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
 
     print('\tfound {} streaks'.format(len(streaks)))
-    print(streaks)
+    sorted_streaks = sorted(streaks.items(), key=lambda t: t[1].latest, reverse=True)
+
+    print('\nTop streaks:')
+    print('============')
+    for user, streak in sorted_streaks:
+        print('{} - {} - {}'.format(user, streak.best, streak.latest))
 
 
 if __name__ == '__main__':
