@@ -2,6 +2,7 @@ import argparse
 
 import parse
 import read
+import render
 
 
 def setup_args():
@@ -48,8 +49,8 @@ def main():
 
     commits = (parse.extract_commits(svg) for svg in svgs)
     streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
-
     print('\tfound {} streaks'.format(len(streaks)))
+
     if args.best:
         sort_attrib = 'best'
     else:
@@ -61,6 +62,8 @@ def main():
     print('============')
     for user, streak in sorted_streaks:
         print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
+
+    render.horizontal_bar(sorted_streaks, sort_attrib)
 
 
 if __name__ == '__main__':

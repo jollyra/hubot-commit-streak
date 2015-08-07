@@ -29,10 +29,10 @@ def _best_streak(year_of_commits):
     for commits in year_of_commits:
         if commits > 0:
             streak += 1
+            if streak > best:
+                best = streak
         else:
             streak = 0
-        if streak > best:
-            best = streak
     return best
 
 
