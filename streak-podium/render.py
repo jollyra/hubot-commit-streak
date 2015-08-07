@@ -7,8 +7,8 @@ def horizontal_bar(sorted_streaks, sort_attrib):
 
     Values have already been sorted by sort_attrib.
     """
-    users = [user for user, _ in sorted_streaks]
-    values = [getattr(streak, sort_attrib) for _, streak in sorted_streaks]
+    users = [user for user, _ in sorted_streaks][::-1]
+    values = [getattr(streak, sort_attrib) for _, streak in sorted_streaks][::-1]
     print(users, values)
 
     chart = pygal.HorizontalStackedBar()
