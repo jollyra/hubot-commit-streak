@@ -60,3 +60,6 @@ target/
 # Input file
 input.txt
 
+# Output
+*.svg
+
