@@ -13,7 +13,6 @@ def setup_args():
     parser.add_argument('-f', '--file', help='member list input filename')
     parser.add_argument('-o', '--org', help='organization to sort')
     parser.add_argument('-l', '--limit', type=int, default=5, help='limit number of users')
-    parser.add_argument('-b', '--best', action='store_true', help='sort by best (default by latest)')
     return parser.parse_args()
 
 
@@ -51,19 +50,14 @@ def main():
     streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
     print('\tfound {} streaks'.format(len(streaks)))
 
-    if args.best:
-        sort_attrib = 'best'
-    else:
-        sort_attrib = 'latest'
 
-    sorted_streaks = sorted(streaks.items(), key=lambda t: getattr(t[1], sort_attrib), reverse=True)
-
-    print('\nTop {} streaks:'.format(sort_attrib))
-    print('============')
-    for user, streak in sorted_streaks:
-        print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
-
-    render.horizontal_bar(sorted_streaks, sort_attrib)
+    for sort in ('best', 'latest'):  # Sort by best, then by latest
+        sorted_streaks = sorted(streaks.items(), key=lambda t: getattr(t[1], sort), reverse=True)
+        print('\nTop {} streaks:'.format(sort))
+        print('============')
+        for user, streak in sorted_streaks[:min(len(sorted_streaks), 5)]:  # Top 5
+            print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
+        render.horizontal_bar(sorted_streaks, sort)
 
 
 if __name__ == '__main__':
