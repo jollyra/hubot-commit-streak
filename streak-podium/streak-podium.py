@@ -60,7 +60,7 @@ def main():
     print('\nTop {} streaks:'.format(sort_attrib))
     print('============')
     for user, streak in sorted_streaks:
-        print('{} - {} - {}'.format(user, streak.best, streak.latest))
+        print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
 
 
 if __name__ == '__main__':
