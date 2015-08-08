@@ -58,6 +58,7 @@ def main():
         for user, streak in sorted_streaks[:min(len(sorted_streaks), 5)]:  # Top 5
             print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
         render.horizontal_bar(sorted_streaks, sort)
+        render.output_png()
 
 
 if __name__ == '__main__':
