@@ -57,9 +57,6 @@ docs/_build/
 # PyBuilder
 target/
 
-# Input file
-input.txt
-
-# Output
-*.svg
+# Input/Output files
+temp/
 
