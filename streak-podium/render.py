@@ -1,4 +1,7 @@
 import pygal
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def horizontal_bar(sorted_streaks, sort):
@@ -10,13 +13,25 @@ def horizontal_bar(sorted_streaks, sort):
     users = [user for user, _ in sorted_streaks][::-1]
     streaks = [getattr(streak, sort) for _, streak in sorted_streaks][::-1]
 
+    title = 'Top contributors by {} streak'.format(sort)
+
+    figure = plt.figure()
+    y_pos = np.arange(len(users))  # y-location of bars
+    plt.barh(y_pos, streaks, align='center', alpha=0.4)
+    plt.yticks(y_pos, users)
+    plt.title(title)
+    plt.xlim([0, max(streaks) + 0.5])  # x-limits a bit wider at right
+
+    figure.savefig('temp/top_{}.png'.format(sort), format='png')
+
+    # Export SVG using pygal
     chart = pygal.HorizontalStackedBar(show_y_labels=False,
                                        show_x_labels=False,
                                        show_legend=False,
                                        print_values=True,
                                        print_zeroes=False,
                                        print_labels=True)
-    chart.title = 'Top contributors by {} streak'.format(sort)
+    chart.title = title
     chart.x_labels = users
 
     values = []
@@ -31,30 +46,5 @@ def horizontal_bar(sorted_streaks, sort):
             values.append(0)  # Let zeroes be boring
     chart.add('Streaks', values)
 
-    chart.render_to_file('top_{}.svg'.format(sort))
-
-
-def output_png():
-    from wand.api import library
-    import wand.color
-    import wand.image
-
-    with open('top_best.svg', 'rb') as svg_file:
-        with wand.image.Image(blob=svg_file.read(), format='svg') as image:
-            png_image = image.make_blob('png')
-        output_filename = 'top_best.png'
-        with open(output_filename, 'wb') as out:
-            out.write(png_image)
-        return
-
-        with wand.image.Image() as image:
-            with wand.color.Color('transparent') as background_color:
-                library.MagickSetBackgroundColor(image.wand,
-                                                 background_color.resource)
-            image.read(blob=svg_file.read())
-            png_image = image.make_blob('png32')
-
-        output_filename = 'top_best.png'
-        with open(output_filename, 'wb') as out:
-            out.write(png_image)
+    chart.render_to_file('temp/top_{}.svg'.format(sort))
 

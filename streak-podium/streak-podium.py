@@ -21,7 +21,7 @@ def gather_usernames(args):
     Return username list from chosen input source.
     """
     if args.file:
-        return read.input_file(args.file)
+        return read.input_file('temp/' + args.file)
     elif args.org:
         return read.org_members(args.org)
     else:
@@ -58,7 +58,6 @@ def main():
         for user, streak in sorted_streaks[:min(len(sorted_streaks), 5)]:  # Top 5
             print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
         render.horizontal_bar(sorted_streaks, sort)
-        render.output_png()
 
 
 if __name__ == '__main__':
