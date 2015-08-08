@@ -20,6 +20,6 @@ def horizontal_bar(sorted_streaks, sort):
     plt.title(title)
     plt.xlim([0, max(streaks) + 0.5])  # x-limits a bit wider at right
 
-    figure.savefig('temp/top_{}.png'.format(sort), format='png')
-    figure.savefig('temp/top_{}.svg'.format(sort), format='svg')
+    for format in ('png', 'svg'):
+        figure.savefig('temp/top_{}.{}'.format(sort, format), format=format)
 
