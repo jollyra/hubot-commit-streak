@@ -20,7 +20,8 @@ def horizontal_bar(sorted_streaks, sort):
     plt.barh(y_pos, streaks, facecolor='#5555EE', edgecolor='grey', align='center')
     plt.yticks(y_pos, users)
     plt.xlim([0, max(streaks) + 10])  # x-limits a bit wider at right
-    plt.subplots_adjust(left=0.25)  # Wider left margin
+    plt.ylim([-1, len(users)])  # tighten y-limits
+    plt.subplots_adjust(left=0.25)  # Wider left margin for long usernames
     plt.title(title)
     ax = plt.gca()
     ax.yaxis.set_ticks_position('none')
