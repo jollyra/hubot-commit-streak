@@ -14,13 +14,13 @@ def horizontal_bar(sorted_streaks, sort):
 
     title = 'Top Contributors by {} Streak'.format(sort.title())
 
-    figure = plt.figure()
+    figure = plt.figure(num=None, figsize=(6, 15))
     y_pos = np.arange(len(users))  # y-location of bars
     print('y_pos', y_pos)
-    plt.barh(y_pos, streaks, facecolor='#ff9999', edgecolor='grey', align='center')
+    plt.barh(y_pos, streaks, facecolor='#5555EE', edgecolor='grey', align='center')
     plt.yticks(y_pos, users)
-    plt.xlim([0, max(streaks) + 0.5])  # x-limits a bit wider at right
-    plt.subplots_adjust(left=0.2)  # Wider left margin
+    plt.xlim([0, max(streaks) + 10])  # x-limits a bit wider at right
+    plt.subplots_adjust(left=0.25)  # Wider left margin
     plt.title(title)
 
     for format in ('png', 'svg'):
