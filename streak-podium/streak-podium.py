@@ -1,4 +1,7 @@
 import argparse
+import collections
+import os
+import json
 
 import parse
 import read
@@ -29,34 +32,43 @@ def gather_usernames(args):
 
 
 def main():
+
     args = setup_args()
 
     print('Running Streak Podium')
     print('---------------------')
 
-    kind = 'file' if args.file else 'Github org'
-    name = args.file if args.file else args.org
-    print('Input is {} [{}]'.format(kind, name))
-    print('\tlimiting query to {} users'.format(args.limit))
+    if os.path.isfile('temp/streaks.json'):
+        print('Found json streaks')
+        with open('temp/streaks.json', 'r') as f:
+            streaks = json.load(f)
+    else:
+        print('Did not find json streaks')
+        kind = 'file' if args.file else 'Github org'
+        name = args.file if args.file else args.org
+        print('Input is {} [{}]'.format(kind, name))
+        print('\tlimiting query to {} users'.format(args.limit))
 
-    print('Gathering usernames...')
-    usernames = gather_usernames(args)
-    print('\tfound {} usernames'.format(len(usernames)))
+        print('Gathering usernames...')
+        usernames = gather_usernames(args)
+        print('\tfound {} usernames'.format(len(usernames)))
 
-    print('Reading streaks...')
-    svgs = (read.svg_data(username) for username in usernames[:args.limit])
+        print('Reading streaks...')
+        svgs = (read.svg_data(username) for username in usernames[:args.limit])
 
-    commits = (parse.extract_commits(svg) for svg in svgs)
-    streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
-    print('\tfound {} streaks'.format(len(streaks)))
+        commits = (parse.extract_commits(svg) for svg in svgs)
+        streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
+        print('\tfound {} streaks'.format(len(streaks)))
 
+        with open('temp/streaks.json', 'w') as f:
+            json.dump(streaks, f)
 
     for sort in ('best', 'latest'):  # Sort by best, then by latest
-        sorted_streaks = sorted(streaks.items(), key=lambda t: getattr(t[1], sort), reverse=True)
+        sorted_streaks = sorted(streaks.items(), key=lambda t: t[1].get(sort), reverse=True)
         print('\nTop {} streaks:'.format(sort))
         print('============')
         for user, streak in sorted_streaks[:min(len(sorted_streaks), 5)]:  # Top 5
-            print('{} - best: {} - latest: {}'.format(user, streak.best, streak.latest))
+            print('{} - best: {} - latest: {}'.format(user, streak['best'], streak['latest']))
         render.horizontal_bar(sorted_streaks, sort)
 
 

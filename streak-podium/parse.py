@@ -50,8 +50,7 @@ def _latest_streak(year_of_commits):
 
 def find_streaks(commits):
     """
-    Return a namedtuple of best & latest streaks, given a year of commits.
+    Return a dict of best & latest streaks, given a year of commits.
     """
-    Streak = namedtuple('Streak', 'best, latest')
-    return Streak(_best_streak(commits), _latest_streak(commits))
+    return {'best': _best_streak(commits), 'latest': _latest_streak(commits)}
 
