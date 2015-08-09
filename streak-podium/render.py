@@ -8,14 +8,11 @@ def horizontal_bar(sorted_streaks, sort):
 
     Values have already been sorted by sort.
     """
-    users = [user for user, _ in sorted_streaks][::-1]
-    print('users', users)
-    streaks = [streak.get(sort) for _, streak in sorted_streaks][::-1]
+    # Only extract those users & streaks for streaks that are non-zero:
+    users, streaks = zip(*[(user, streak.get(sort)) for user, streak
+                           in sorted_streaks if streak.get(sort) > 0][::-1])
 
-    non_zero = len([x for x in streaks if x > 0])
-    non_zero = max(5, non_zero)
-
-    title = 'Top contributors by {} streak'.format(sort)
+    title = 'Top Contributors by {} Streak'.format(sort.title())
 
     figure = plt.figure()
     y_pos = np.arange(len(users))  # y-location of bars
