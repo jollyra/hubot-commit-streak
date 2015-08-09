@@ -22,6 +22,9 @@ def horizontal_bar(sorted_streaks, sort):
     plt.xlim([0, max(streaks) + 10])  # x-limits a bit wider at right
     plt.subplots_adjust(left=0.25)  # Wider left margin
     plt.title(title)
+    ax = plt.gca()
+    ax.yaxis.set_ticks_position('none')
+    ax.xaxis.set_ticks_position('bottom')
 
     for format in ('png', 'svg'):
         figure.savefig('temp/top_{}.{}'.format(sort, format), format=format)
