@@ -24,3 +24,12 @@ Then add **hubot-streak-podium** to your `external-scripts.json`:
 user1>> hubot hello
 hubot>> hello!
 ```
+
+# Python streak-podium
+
+Python version lives in `streak-podium` dir.
+
+Queries Github, retrieves streaks and renders chart using Matplotlib.
+
+![](https://github.com/supermitch/streak-podium/blob/master/sample/top_best.png)
+
