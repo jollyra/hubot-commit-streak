@@ -16,18 +16,32 @@ def horizontal_bar(sorted_streaks, sort):
 
     figure = plt.figure(num=None, figsize=(6, 15))
     y_pos = np.arange(len(users))  # y-location of bars
-    print('y_pos', y_pos)
-    plt.barh(y_pos, streaks, facecolor='#7AE2FF', edgecolor='#6699FF',
-             align='center')
+    rects =  plt.barh(y_pos, streaks, facecolor='#7AE2FF', edgecolor='#6699FF',
+                      align='center')
     plt.yticks(y_pos, users)
     plt.xlim([0, max(streaks) + 10])  # x-limits a bit wider at right
     plt.ylim([-1, len(users)])  # tighten y-limits
     plt.subplots_adjust(left=0.25)  # Wider left margin for long usernames
     plt.title(title)
     ax = plt.gca()
-    ax.set_frame_on(False)
-    ax.yaxis.set_ticks_position('none')
-    ax.xaxis.set_ticks_position('bottom')
+    ax.set_frame_on(False)  # Turn off all frame lines
+    ax.yaxis.set_ticks_position('none')  # Remove axis ticks
+    ax.xaxis.set_ticks_position('none')
+
+    for rect in rects:
+        width = int(rect.get_width())
+        if (width < 6):        # Bars aren't wide enough to print value inside
+            xloc = width + 2   # Shift text to right side of right edge
+            align = 'left'
+        else:
+            xloc = width - 2  # Shift text to left side of right edge
+            align = 'right'
+
+        # Center the text vertically in the bar
+        yloc = rect.get_y() + rect.get_height() / 2.0
+        ax.text(xloc, yloc, str(width),
+                horizontalalignment=align, verticalalignment='center',
+                color='black', weight='bold')
 
     for format in ('png', 'svg'):
         figure.savefig('temp/top_{}.{}'.format(sort, format), format=format)
