@@ -30,18 +30,12 @@ def horizontal_bar(sorted_streaks, sort):
 
     for rect in rects:
         width = int(rect.get_width())
-        if (width < 6):        # Bars aren't wide enough to print value inside
-            xloc = width + 2   # Shift text to right side of right edge
-            align = 'left'
-        else:
-            xloc = width - 2  # Shift text to left side of right edge
-            align = 'right'
+        xloc = width + 2   # Shift text to right side of right edge
 
-        # Center the text vertically in the bar
-        yloc = rect.get_y() + rect.get_height() / 2.0
+        yloc = rect.get_y() + rect.get_height() / 2  # Center text vertically
         ax.text(xloc, yloc, str(width),
-                horizontalalignment=align, verticalalignment='center',
-                color='black', weight='bold')
+                horizontalalignment='left', verticalalignment='center',
+                color='black')
 
     for format in ('png', 'svg'):
         figure.savefig('temp/top_{}.{}'.format(sort, format), format=format)
