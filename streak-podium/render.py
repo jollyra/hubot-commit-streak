@@ -26,7 +26,7 @@ def horizontal_bar(sorted_streaks, sort):
     ax = plt.gca()
     ax.set_frame_on(False)  # Turn off all frame lines
     ax.yaxis.set_ticks_position('none')  # Remove axis ticks
-    ax.xaxis.set_ticks_position('none')
+    ax.xaxis.set_visible(False)
 
     for rect in rects:
         width = int(rect.get_width())
