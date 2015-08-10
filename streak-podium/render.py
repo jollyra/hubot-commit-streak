@@ -17,7 +17,8 @@ def horizontal_bar(sorted_streaks, sort):
     figure = plt.figure(num=None, figsize=(6, 15))
     y_pos = np.arange(len(users))  # y-location of bars
     print('y_pos', y_pos)
-    plt.barh(y_pos, streaks, facecolor='#5555EE', edgecolor='grey', align='center')
+    plt.barh(y_pos, streaks, facecolor='#7AE2FF', edgecolor='#6699FF',
+             align='center')
     plt.yticks(y_pos, users)
     plt.xlim([0, max(streaks) + 10])  # x-limits a bit wider at right
     plt.ylim([-1, len(users)])  # tighten y-limits
