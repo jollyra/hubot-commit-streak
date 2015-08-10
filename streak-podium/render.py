@@ -28,14 +28,21 @@ def horizontal_bar(sorted_streaks, sort):
     ax.yaxis.set_ticks_position('none')  # Remove axis ticks
     ax.xaxis.set_visible(False)
 
-    for rect in rects:
+    seen = set()
+    top_color = (122/255, 226/255, 255/255)  # scale to 0-1
+    for count, rect in enumerate(rects[::-1]):
         width = int(rect.get_width())
         xloc = width + 2   # Shift text to right side of right edge
 
-        yloc = rect.get_y() + rect.get_height() / 2  # Center text vertically
-        ax.text(xloc, yloc, str(width),
-                horizontalalignment='left', verticalalignment='center',
-                color='black')
+        if width not in seen:  # Only print the first label of this value
+            yloc = rect.get_y() + rect.get_height() / 2  # Center text vertically
+            ax.text(xloc, yloc, str(width),
+                    horizontalalignment='left', verticalalignment='center')
+        seen.add(width)
+
+        scaling = (len(rects) - 1 - count) / (len(rects) - 1)
+        new_color = [x * scaling for x in top_color]
+        rect.set_color(new_color)  # Scale colour by position
 
     for format in ('png', 'svg'):
         figure.savefig('temp/top_{}.{}'.format(sort, format), format=format)
