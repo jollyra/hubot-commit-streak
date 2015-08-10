@@ -22,7 +22,7 @@ def horizontal_bar(sorted_streaks, sort):
     plt.xlim([0, max(streaks) + 10])  # x-limits a bit wider at right
     plt.ylim([-1, len(users)])  # tighten y-limits
     plt.subplots_adjust(left=0.25)  # Wider left margin for long usernames
-    plt.title(title)
+    plt.title(title, fontsize=20)
     ax = plt.gca()
     ax.set_frame_on(False)  # Turn off all frame lines
     ax.yaxis.set_ticks_position('none')  # Remove axis ticks
