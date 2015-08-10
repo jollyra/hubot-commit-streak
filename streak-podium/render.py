@@ -30,11 +30,11 @@ def horizontal_bar(sorted_streaks, sort):
 
     seen = set()
     top_color = (122/255, 226/255, 255/255)  # scale to 0-1
-    for count, rect in enumerate(rects[::-1]):
+    for count, rect in enumerate(rects[::-1]):  # Start from the top for labels
         width = int(rect.get_width())
-        xloc = width + 2   # Shift text to right side of right edge
 
         if width not in seen:  # Only print the first label of this value
+            xloc = width + 2   # Shift text to right side of right edge
             yloc = rect.get_y() + rect.get_height() / 2  # Center text vertically
             ax.text(xloc, yloc, str(width),
                     horizontalalignment='left', verticalalignment='center')
