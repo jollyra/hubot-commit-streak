@@ -25,6 +25,7 @@ def horizontal_bar(sorted_streaks, sort):
     plt.subplots_adjust(left=0.25)  # Wider left margin for long usernames
     plt.title(title)
     ax = plt.gca()
+    ax.set_frame_on(False)
     ax.yaxis.set_ticks_position('none')
     ax.xaxis.set_ticks_position('bottom')
 
