@@ -9,6 +9,8 @@ def horizontal_bar(sorted_streaks, sort):
     Values have already been sorted by sort.
     """
     # Only extract those users & streaks for streaks that are non-zero:
+    if not sorted_streaks:
+        return
     users, streaks = zip(*[(user, streak.get(sort)) for user, streak
                            in sorted_streaks if streak.get(sort) > 0][::-1])
 

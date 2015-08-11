@@ -22,11 +22,11 @@ def org_members(org_name):
         r = requests.get(url)
     except requests.exceptions.ConnectionError:
         logging.warn('Connection error trying to get org members: [{}]'.format(url))
-        return None
+        return []
     if r.status_code == 404:
         print('Got 404')
         print(r.status_code)
-    return None
+    return []
 
     print('response')
     print(r.text)

@@ -60,8 +60,12 @@ def main():
         streaks = {user: parse.find_streaks(x) for user, x in zip(usernames, commits)}
         print('\tfound {} streaks'.format(len(streaks)))
 
-        with open('temp/streaks.json', 'w') as f:
-            json.dump(streaks, f)
+
+    if not streaks:
+        return
+
+    with open('temp/streaks.json', 'w') as f:
+        json.dump(streaks, f)
 
     for sort in ('best', 'latest'):  # Sort by best, then by latest
         sorted_streaks = sorted(streaks.items(), key=lambda t: t[1].get(sort), reverse=True)
