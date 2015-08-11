@@ -17,8 +17,20 @@ def org_members(org_name):
     """
     Query Github API and return list of members from a Github organization.
     """
-    # TODO: Return github org members, not a placeholder
-    return ['supermitch', 'Jollyra']
+    url = 'https://github.com/orgs/{}/members'.format(org_name)
+    try:
+        r = requests.get(url)
+    except requests.exceptions.ConnectionError:
+        logging.warn('Connection error trying to get org members: [{}]'.format(url))
+        return None
+    if r.status_code == 404:
+        print('Got 404')
+        print(r.status_code)
+    return None
+
+    print('response')
+    print(r.text)
+    return r.text
 
 
 def svg_data(username):
