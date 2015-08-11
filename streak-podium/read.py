@@ -18,8 +18,9 @@ def org_members(org_name):
     Query Github API and return list of members from a Github organization.
     """
     url = 'https://github.com/orgs/{}/members'.format(org_name)
+    headers = {'Accept': 'application/vnd.github.ironman-preview+json'}
     try:
-        r = requests.get(url)
+        r = requests.get(url, headers=headers)
     except requests.exceptions.ConnectionError:
         logging.warn('Connection error trying to get org members: [{}]'.format(url))
         return []
