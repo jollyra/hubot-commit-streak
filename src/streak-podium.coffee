@@ -15,14 +15,5 @@
 #   Nigel Rahkola <me@nigelrahkola.com>
 
 module.exports = (robot) ->
-  robot.hear /longest github streaks/i, (res) ->
-    res.send "supermitch: 72"
-    res.send "Jollyra: 22"
-    res.send "joshlemer: 9"
-    res.send "ananthakumaran: 6"
-    res.send "mattbrehmer: 6"
-    res.send "jennih: 6"
-    res.send "tylerfawcett: 5"
-    res.send "Abarrowman: 5"
-    res.send "nicwaller: 3"
-    res.send "trevortuepah: 3"
+  robot.hear /github streak leaders/i, (res) ->
+    res.send "supermitch: 72\nJollyra: 22\njoshlemer: 9\nananthakumaran: 6\nmattbrehmer: 6\njennih: 6\ntylerfawcett: 5\nAbarrowman: 5\nnicwaller: 3\ntrevortuepah: 3"
