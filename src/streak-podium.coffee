@@ -15,8 +15,14 @@
 #   Nigel Rahkola <me@nigelrahkola.com>
 
 module.exports = (robot) ->
-  robot.respond /hello/, (res) ->
-    res.reply "hello!"
-
-  robot.hear /orly/, ->
-    res.send "yarly"
+  robot.hear /longest github streaks/i, (res) ->
+    res.send "supermitch: 72"
+    res.send "Jollyra: 22"
+    res.send "joshlemer: 9"
+    res.send "ananthakumaran: 6"
+    res.send "mattbrehmer: 6"
+    res.send "jennih: 6"
+    res.send "tylerfawcett: 5"
+    res.send "Abarrowman: 5"
+    res.send "nicwaller: 3"
+    res.send "trevortuepah: 3"
