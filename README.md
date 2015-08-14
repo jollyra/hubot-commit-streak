@@ -21,8 +21,9 @@ Then add **hubot-streak-podium** to your `external-scripts.json`:
 ## Sample Interaction
 
 ```
-user1>> hubot hello
-hubot>> hello!
+user1>> hubot github streak leaders hubot>> redleader: 12
+        redthree: 10
+        redsix: 3
 ```
 
 # Python streak-podium
