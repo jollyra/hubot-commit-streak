@@ -60,3 +60,6 @@ target/
 # Input/Output files
 temp/
 
+# Local settings
+streak-podium/config/local.py
+
