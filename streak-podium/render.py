@@ -42,9 +42,10 @@ def horizontal_bar(sorted_streaks, sort):
                     horizontalalignment='left', verticalalignment='center')
         seen.add(width)
 
-        scaling = (len(rects) - 1 - count) / (len(rects) - 1)
-        new_color = [x * scaling for x in top_color]
-        rect.set_color(new_color)  # Scale colour by position
+        if len(rects) > 1:
+            scaling = (len(rects) - 1 - count) / (len(rects) - 1)
+            new_color = [x * scaling for x in top_color]
+            rect.set_color(new_color)  # Scale colour by position
 
     for format in ('png', 'svg'):
         figure.savefig('temp/top_{}.{}'.format(sort, format), format=format)
