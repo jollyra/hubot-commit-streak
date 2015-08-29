@@ -17,6 +17,9 @@ def org_members(org_name):
     """
     Query Github API and return list of members from a Github organization.
     """
+    if org_name is None:
+        org_name = 'pulseenergy'
+
     url = 'https://github.com/orgs/{}/members'.format(org_name)
     headers = {'Accept': 'application/vnd.github.ironman-preview+json'}
     try:
