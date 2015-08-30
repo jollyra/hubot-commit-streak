@@ -53,7 +53,7 @@ def get_orgs_for_user():
 
 def get_members_in_org(org_login):
     """ Retrieve user orgs. """
-    print('RETRIEVING members in org from Github')
+    print('RETRIEVING members in org [{}] from Github'.format(org_login))
 
     json_content = utils.retrieve_access_token()  # Auth info TODO: Which user?
 
