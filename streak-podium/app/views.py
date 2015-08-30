@@ -53,3 +53,8 @@ def success():
 def failure():
     return render_template('failure.html')
 
+
+@app.route('/streaks')
+def streaks():
+    return render_template('streaks.html')
+
