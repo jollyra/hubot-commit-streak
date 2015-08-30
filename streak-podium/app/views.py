@@ -59,12 +59,19 @@ def streaks():
     if response.status_code == requests.codes.ok:
         orgs = utils.parse_orgs(response.json())
         for org in orgs:
-            response = fetch.get_members_in_org(org['title'])
+            response = fetch.get_members_in_org(org['login'])
             if response.status_code == requests.codes.ok:
-                print('members response', response.json())
+                members = utils.parse_org_members(response.json())
+                print('members response', [x['login'] for x in members])
+                org['count'] = len(members)
     else:
         print(response.content)
-        orgs = [{'title': 'this'}, {'title': 'that'}, {'title': 'hat'}, {'title': 'cat'}]
+        orgs = [
+            {'login': 'rat', 'count': 1},
+            {'login': 'mat', 'count': 2},
+            {'login': 'hat', 'count': 3},
+            {'login': 'cat', 'count': 5},
+        ]
 
     return render_template('streaks.html',
                            orgs=orgs)

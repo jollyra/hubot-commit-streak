@@ -29,5 +29,12 @@ def retrieve_access_token():
 
 def parse_orgs(org_json):
     """ Extract what we need from Github orgs listing response. """
-    return [{'title': org['login']} for org in org_json]
+    return [{'login': org['login']} for org in org_json]
+
+
+def parse_org_members(members_json):
+    """ Extract what we need from Github orgs members listing response. """
+    return [{'login': member['login']} for member in members_json]
+
+
 

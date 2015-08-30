@@ -12,7 +12,7 @@
     <h3>Organization Streaks</h3>
     <ol>
     {% for org in orgs %}
-        <li><strong>{{ org['title'] }}</strong></li>
+    <li><strong>{{ org['login'] }}</strong> ({{ org['count'] }} members)</li>
     {% else %}
         <li><em>Unbelievable. No orgs to display.</em></li>
     {% endfor %}
