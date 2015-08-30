@@ -8,8 +8,7 @@ from flask import render_template, request, redirect, url_for
 
 
 from config import config
-from app import app
-from app import fetch
+from app import app, fetch, utils
 
 
 @app.route('/')

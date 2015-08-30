@@ -26,3 +26,8 @@ def retrieve_access_token():
     with open(json_file, 'r') as f:  # TODO: Retrieve response from DB
         return json.load(f)
 
+
+def parse_orgs(org_json):
+    """ Extract what we need from Github orgs listing response. """
+    return [{'title': org['login']} for org in org_json]
+
