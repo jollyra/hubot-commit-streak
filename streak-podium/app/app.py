@@ -1,5 +1,3 @@
-from config import config
-
 def main():
     from app import app
     app.run()  # Already configured in __init__.py
