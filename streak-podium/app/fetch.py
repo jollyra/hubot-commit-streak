@@ -33,30 +33,20 @@ def post_temporary_code(code, state):
 
 def get_orgs_for_user():
     """ Retrieve user orgs. """
-    # TODO: Which user??
     print('RETRIEVING orgs from Github')
 
-    json_content = utils.retrieve_access_token()  # Auth info
+    json_content = utils.retrieve_access_token()  # Auth info TODO: Which user?
 
-    url = 'https://github.com//user/orgs'
+    url = 'https://api.github.com/user/orgs'
     headers = {
         'Accept': 'application/json',
         'Authorization': 'token {}'.format(json_content['access_token']),
     }
-    # payload = {
-    #     'client_id': config.GITHUB_CLIENT_ID,
-    #     'client_secret': config.GITHUB_CLIENT_SECRET,
-    #     'code': code,
-    #     'redirect_uri': url_for('auth', _external=True),
-    #     'state': state,
-    # }
-    # r = requests.post(url, headers=header, data=payload)
-    r = requests.post(url, headers=headers)
+    r = requests.get(url, headers=headers)
 
     if r.status_code == requests.codes.ok:
         print('Response: {} -- Org request succeeded'.format(r.status_code))
     else:
         print('Response: {} -- Org request failed'.format(r.status_code))
     return r
-
 

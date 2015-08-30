@@ -57,8 +57,12 @@ def failure():
 @app.route('/streaks')
 def streaks():
     response = fetch.get_orgs_for_user()
-    print(response.json())
-    orgs = [{'title': 'this'}, {'title': 'that'}, {'title': 'hat'}, {'title': 'cat'}]
+    if response.status_code == requests.codes.ok:
+        orgs = utils.parse_orgs(response.json())
+    else:
+        print(response.content)
+        orgs = [{'title': 'this'}, {'title': 'that'}, {'title': 'hat'}, {'title': 'cat'}]
+
     return render_template('streaks.html',
                            orgs=orgs)
 
