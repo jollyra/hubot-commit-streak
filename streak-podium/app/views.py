@@ -34,24 +34,8 @@ def auth():
         response = fetch.post_temporary_code(code, state)
 
         if response.status_code == requests.codes.ok:
-            print('response.content: ', response.content)
-            contents = response.json()
-            print('contents: {}'.format(contents))
 
-            access_token = contents['access_token']
-            scope = contents['scope']
-            token_type = contents['token_type']
-
-            print('ACCESS_TOKEN', access_token)
-            print('SCOPE', scope)
-            print('TOKEN_TYPE', token_type)
-
-            root = os.path.dirname(os.path.abspath(__file__))
-            out_file = os.path.join(root, 'auth.json')
-            with open(out_file, 'w') as f:  # TODO: Persist response in DB
-                f.write('ACCESS_TOKEN {}\nSCOPE {}\nTOKEN_TYPE {}\n'
-                        ''.format(access_token, scope, token_type))
-
+            utils.persist_access_token(response.json())
             return redirect(url_for('success'))
         else:
             return redirect(url_for('failure'))
