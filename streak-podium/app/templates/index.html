@@ -4,7 +4,7 @@
     <h2>Authorize Application</h2>
 
     <div>
-        <a href="https://github.com/login/oauth/authorize?client_id={{ client_id }}&redirect_uri=http://127.0.0.1:5000/auth&state={{ state }}">Connect to Github</a>
+        <a href="https://github.com/login/oauth/authorize?client_id={{ client_id }}&redirect_uri={{ auth_url }}&scope={{ scope }}&state={{ state }}">Connect to Github</a>
     </div>
 
 {% endblock %}
