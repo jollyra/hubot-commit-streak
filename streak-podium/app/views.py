@@ -56,5 +56,7 @@ def failure():
 
 @app.route('/streaks')
 def streaks():
-    return render_template('streaks.html')
+    orgs = [{'title': 'this'}, {'title': 'that'}, {'title': 'hat'}, {'title': 'cat'}]
+    return render_template('streaks.html',
+                           orgs=orgs)
 

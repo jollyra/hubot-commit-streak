@@ -10,8 +10,13 @@
     <p>Personal streaks here</p>
 
     <h3>Organization Streaks</h3>
-
-    <p>Personal streaks here</p>
+    <ol>
+    {% for org in orgs %}
+        <li><strong>{{ org['title'] }}</strong></li>
+    {% else %}
+        <li><em>Unbelievable. No orgs to display.</em></li>
+    {% endfor %}
+    </ol>
 
 {% endblock %}
 
