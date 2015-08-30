@@ -59,6 +59,7 @@ target/
 
 # Input/Output files
 temp/
+auth.json
 
 # Local settings
 streak-podium/config/local.py
