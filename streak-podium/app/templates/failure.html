@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>Authorization Denied!</h2>
+
+    <p>In order to use this app, you must grant permission for it to
+    access your Github account.</p>
+
+    <p>Since you have not done that, I'm afraid we can't be friends.</p>
+
+    <p>If you'd like to try again, go <a href={{ url_for('index') }}>back to index</a>.</p>
+
+{% endblock %}
+
