@@ -90,3 +90,21 @@ def member_page(member_login):
         print('Response: {} -- Member Page request failed'.format(r.status_code))
     return r
 
+def member_contributions(member_login):
+    """ Retrieve user page. """
+    print('RETRIEVING member [{}] Contributions from Github'.format(member_login))
+
+    json_content = utils.retrieve_access_token()  # Auth info TODO: Which user?
+
+    url = 'https://github.com/users/{}/contributions'.format(member_login)
+    headers = {
+        'Authorization': 'token {}'.format(json_content['access_token']),
+    }
+    r = requests.get(url, headers=headers)
+
+    if r.status_code == requests.codes.ok:
+        print('Response: {} -- Member Contributions request succeeded'.format(r.status_code))
+    else:
+        print('Response: {} -- Member Contributions request failed'.format(r.status_code))
+    return r
+

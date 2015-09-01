@@ -65,11 +65,15 @@ def streaks():
                 members = utils.parse_org_members(response.json())
                 org['count'] = len(members)
                 print('Found {} members'.format(org['count']))
-                for member in members:
+                for member in members[-5:]:
                     response = fetch.member_page(member['login'])
                     if response.status_code == requests.codes.ok:
                         print('member account: ')
                         print(response.json())
+                        response = fetch.member_contributions(member['login'])
+                        if response.status_code == requests.codes.ok:
+                            print('member contributions: ')
+                            print(response.content)
     else:
         print(response.content)
         orgs = [
