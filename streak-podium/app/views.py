@@ -55,15 +55,21 @@ def failure():
 
 @app.route('/streaks')
 def streaks():
-    response = fetch.get_orgs_for_user()
+    response = fetch.orgs_for_user()
     if response.status_code == requests.codes.ok:
         orgs = utils.parse_orgs(response.json())
         for org in orgs:
-            response = fetch.get_members_in_org(org['login'])
+            # TODO: Pagination
+            response = fetch.members_in_org(org['login'])
             if response.status_code == requests.codes.ok:
                 members = utils.parse_org_members(response.json())
-                print('members response', [x['login'] for x in members])
                 org['count'] = len(members)
+                print('Found {} members'.format(org['count']))
+                for member in members:
+                    response = fetch.member_page(member['login'])
+                    if response.status_code == requests.codes.ok:
+                        print('member account: ')
+                        print(response.json())
     else:
         print(response.content)
         orgs = [

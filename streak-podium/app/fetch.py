@@ -31,7 +31,7 @@ def post_temporary_code(code, state):
     return r
 
 
-def get_orgs_for_user():
+def orgs_for_user():
     """ Retrieve user orgs. """
     print('RETRIEVING orgs from Github')
 
@@ -51,7 +51,7 @@ def get_orgs_for_user():
     return r
 
 
-def get_members_in_org(org_login):
+def members_in_org(org_login):
     """ Retrieve user orgs. """
     print('RETRIEVING members in org [{}] from Github'.format(org_login))
 
@@ -68,5 +68,25 @@ def get_members_in_org(org_login):
         print('Response: {} -- Org Members request succeeded'.format(r.status_code))
     else:
         print('Response: {} -- Org Members request failed'.format(r.status_code))
+    return r
+
+
+def member_page(member_login):
+    """ Retrieve user page. """
+    print('RETRIEVING member [{}] from Github'.format(member_login))
+
+    json_content = utils.retrieve_access_token()  # Auth info TODO: Which user?
+
+    url = 'https://api.github.com/users/{}'.format(member_login)
+    headers = {
+        'Accept': 'application/json',
+        'Authorization': 'token {}'.format(json_content['access_token']),
+    }
+    r = requests.get(url, headers=headers)
+
+    if r.status_code == requests.codes.ok:
+        print('Response: {} -- Member Page request succeeded'.format(r.status_code))
+    else:
+        print('Response: {} -- Member Page request failed'.format(r.status_code))
     return r
 
