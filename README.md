@@ -24,13 +24,3 @@ Then add **hubot-streak-podium** to your `external-scripts.json`:
 user1>> hubot github streak leaders hubot>> redleader: 12
         redthree: 10
         redsix: 3
-```
-
-# Python streak-podium
-
-Python version lives in `streak-podium` dir.
-
-Queries Github, retrieves streaks and renders chart using Matplotlib.
-
-![](https://github.com/supermitch/streak-podium/blob/master/sample/top_best.png)
-
