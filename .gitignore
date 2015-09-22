@@ -67,3 +67,6 @@ auth.json
 # Local settings
 streak-podium/config/local.py
 
+# Access Token
+access_token
+
