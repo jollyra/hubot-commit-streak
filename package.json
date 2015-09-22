@@ -17,6 +17,7 @@
   },
 
   "dependencies": {
+    "request": "2.63.0"
   },
 
   "peerDependencies": {
