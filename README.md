@@ -21,6 +21,16 @@ Then add **hubot-streak-podium** to your `external-scripts.json`:
 ## Sample Interaction
 
 ```
-user1>> hubot github streak leaders hubot>> redleader: 12
+user1>> hubot github streak leaders hubot>>
+        redleader: 12
         redthree: 10
         redsix: 3
+
+## Local Testing
+
+1. mkdir streakbot
+1. cd streakbot
+1. yo hubot
+1. follow the yo instructions
+1. run streakbot with >bin/hubot
+1. try a command like >github streak leaders
