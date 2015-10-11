@@ -17,5 +17,11 @@
 #   Mitch Leblanc <>
 
 module.exports = (robot) ->
-  robot.hear /github streak leaders/i, (res) ->
-    res.send "supermitch: 72\nJollyra: 22\njoshlemer: 9\nananthakumaran: 6\nmattbrehmer: 6\njennih: 6\ntylerfawcett: 5\nAbarrowman: 5\nnicwaller: 3\ntrevortuepah: 3"
+
+  robot.hear /streak ladder/i, (res) ->
+    access_token = process.env.ORG_ACCESS_TOKEN
+    unless access_token?
+      res.send "Missing ORG_ACCESS_TOKEN in environment: please set and try again"
+      return
+    res.send "Found the access token in the environment! #{acces_token}"
+
