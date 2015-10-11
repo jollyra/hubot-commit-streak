@@ -3,16 +3,18 @@
 #
 # Configuration:
 #   LIST_OF_ENV_VARS_TO_SET
+#   ORG_ACCESS_TOKEN
 #
 # Commands:
-#   hubot hello - <what the respond trigger does>
-#   orly - <what the hear trigger does>
+#   streak ladder - <Gets a list of the longest github commit streaks in your org>
 #
 # Notes:
-#   <optional notes required for the script>
+#   An access token is required by the github api to access a private org's members
+#   so an account that is a member of the private org is required.
 #
 # Author:
 #   Nigel Rahkola <me@nigelrahkola.com>
+#   Mitch Leblanc <>
 
 module.exports = (robot) ->
   robot.hear /github streak leaders/i, (res) ->
