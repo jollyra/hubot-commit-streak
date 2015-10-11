@@ -3,7 +3,7 @@
 #
 # Configuration:
 #   LIST_OF_ENV_VARS_TO_SET
-#   ORG_ACCESS_TOKEN
+#   HUBOT_ORG_ACCESS_TOKEN
 #
 # Commands:
 #   streak ladder - <Gets a list of the longest github commit streaks in your org>
@@ -19,7 +19,7 @@
 module.exports = (robot) ->
 
   robot.hear /streak ladder/i, (res) ->
-    access_token = process.env.ORG_ACCESS_TOKEN
+    access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
     unless access_token?
       res.send "Missing ORG_ACCESS_TOKEN in environment: please set and try again"
       return
