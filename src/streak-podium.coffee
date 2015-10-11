@@ -23,5 +23,5 @@ module.exports = (robot) ->
     unless access_token?
       res.send "Missing ORG_ACCESS_TOKEN in environment: please set and try again"
       return
-    res.send "Found the access token in the environment! #{acces_token}"
+    res.send "Found the access token in the environment! #{access_token}"
 
