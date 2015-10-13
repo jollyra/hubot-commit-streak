@@ -25,3 +25,9 @@ module.exports = (robot) ->
       return
     res.send "Found the access token in the environment! #{access_token}"
 
+  robot.hear /http test/i, (res) ->
+    access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
+    robot.http("https://api.github.com/user?access_token=#{access_token}")
+      .get() (err, response, body) ->
+        res.send "Got a response! #{body}"
+
