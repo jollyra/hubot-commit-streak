@@ -16,6 +16,7 @@
 #   Nigel Rahkola <me@nigelrahkola.com>
 #   Mitch Leblanc <>
 
+
 module.exports = (robot) ->
 
   robot.hear /streak ladder/i, (res) ->
@@ -35,6 +36,6 @@ module.exports = (robot) ->
     orgLogin = 'pulseenergy'
     access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
     robot.http("https://api.github.com/orgs/#{orgLogin}/members")
-      .header("Accept": "application/json", "Authorization": "token #{access_token}")
+      .header('accept', 'application/json', 'Authorization', 'token #{access_token}')
       .get() (err, response, body) ->
         res.send "Got a response! #{body}"
