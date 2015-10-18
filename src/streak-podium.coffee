@@ -33,9 +33,11 @@ module.exports = (robot) ->
         res.send "Got a response! #{body}"
 
   robot.hear /org test/i, (res) ->
-    orgLogin = 'pulseenergy'
+    orgLogin = "pulseenergy"  # TODO: also get this from an env var
     access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
     robot.http("https://api.github.com/orgs/#{orgLogin}/members")
-      .header('accept', 'application/json', 'Authorization', 'token #{access_token}')
+      .header("accept", "application/json", "Authorization", "token #{access_token}")
       .get() (err, response, body) ->
-        res.send "Got a response! #{body}"
+        usersJson = JSON.parse(body)
+        users = (((json) -> return json) json for json in usersJson)
+        res.send users[0].login
