@@ -18,26 +18,31 @@
 
 
 module.exports = (robot) ->
-
-  robot.hear /streak ladder/i, (res) ->
-    access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
-    unless access_token?
-      res.send "Missing ORG_ACCESS_TOKEN in environment: please set and try again"
-      return
-    res.send "Found the access token in the environment! #{access_token}"
-
-  robot.hear /http test/i, (res) ->
-    access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
-    robot.http("https://api.github.com/user?access_token=#{access_token}")
-      .get() (err, response, body) ->
-        res.send "Got a response! #{body}"
-
-  robot.hear /org test/i, (res) ->
+  robot.hear /org test1/i, (res) ->
     orgLogin = "pulseenergy"  # TODO: also get this from an env var
     access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
-    robot.http("https://api.github.com/orgs/#{orgLogin}/members")
-      .header("accept", "application/json", "Authorization", "token #{access_token}")
-      .get() (err, response, body) ->
-        usersJson = JSON.parse(body)
-        users = (((json) -> return json) json for json in usersJson)
-        res.send users[0].login
+    unless access_token?
+      console.log("Missing ORG_ACCESS_TOKEN in environment: please set and try again")
+      return
+    console.log("Found the access token in the environment! #{access_token}")
+    ladder = buildLadder(orgLogin, access_token, robot, res)
+
+
+buildLadder = (orgLogin, access_token, robot, res) ->
+  robot.http("https://api.github.com/orgs/#{orgLogin}/members")
+    .header("accept", "application/json", "Authorization", "token #{access_token}")
+    .get() (err, response, body) ->
+      if err
+        console.log("NUTS! #{err} statusCode: #{response.statusCode}")
+      else
+        result = JSON.parse(body)
+        users = (((json) -> return json) json for json in result)
+        getContributions(robot, res, users[0].login)
+
+getContributions = (robot, res, userLogin) ->
+   robot.http("https://github.com/users/#{userLogin}/contributions")
+    .get() (err, response, body) ->
+      if err
+        console.log("#{response.statusCode} getting  contributions for user #{userLogin}")
+      else
+        res.send body
