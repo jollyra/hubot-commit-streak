@@ -43,6 +43,8 @@ module.exports = (robot) ->
       console.log(body)
       return body
     ).then((body) ->
+      # Use a map here to create an array of promises, then promise.all the promises
+      # and iterate through results to get contribs for each user.
       return getContributions(body[0].login)
     ).then((user) ->
       console.log('\n\nUSERLOGIN')
