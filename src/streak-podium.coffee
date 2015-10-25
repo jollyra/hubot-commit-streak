@@ -18,6 +18,7 @@
 
 Promise = require("bluebird")
 request = Promise.promisify(require("request"))
+_ = require("underscore")
 
 module.exports = (robot) ->
   robot.hear /ladder/i, (res) ->
@@ -37,21 +38,26 @@ module.exports = (robot) ->
         'User-Agent': 'request'
       }
     }
+
+    # Store the contribution svgs in this list
+    contributions = []
+
     request(options).spread((response, body) ->
-      console.log(response)
-      console.log('\n\n@@@\n')
-      console.log(body)
+      # console.log(response)
       return body
     ).then((body) ->
-      # Use a map here to create an array of promises, then promise.all the promises
-      # and iterate through results to get contribs for each user.
-      return getContributions(body[0].login)
-    ).then((user) ->
-      console.log('\n\nUSERLOGIN')
-      console.log(user)
+      promises = _.map(body, (userJson) ->
+        return getContributions(userJson.login, contributions)
+      )
+
+      Promise.all(promises).then(() ->
+        console.log("what should we have here?")
+        console.log("contributions: ", contributions.length)
+      )
     )
 
-getContributions = (userLogin) ->
-  request({uri: "https://github.com/users/#{userLogin}/contributions"}).spread((response, body) ->
-    return body
+getContributions = (userLogin, contributions) ->
+  console.log(userLogin)
+  return request({uri: "https://github.com/users/#{userLogin}/contributions"}).spread((response, body) ->
+    contributions.push(body)
   )
