@@ -22,12 +22,11 @@ _ = require("underscore")
 
 module.exports = (robot) ->
   robot.hear /ladder/i, (res) ->
-    orgLogin = "pulseenergy"  # TODO: also get this from an env var
+    orgLogin = process.env.HUBOT_ORG_LOGIN
     access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
-    unless access_token?
-      console.log("Missing ORG_ACCESS_TOKEN in environment: please set and try again")
+    unless access_token && orgLogin?
+      res.send ":( you need to supply HUBOT_ORG_ACCESS_TOKEN and HUBOT_ORG_LOGIN"
       return
-    console.log("Found the access token in the environment! #{access_token}")
 
     options = {
       uri: "https://api.github.com/orgs/#{orgLogin}/members",
