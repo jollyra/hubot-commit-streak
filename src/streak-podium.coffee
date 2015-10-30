@@ -21,7 +21,7 @@ request = Promise.promisify(require("request"))
 _ = require("underscore")
 
 module.exports = (robot) ->
-  robot.hear /ladder/i, (res) ->
+  robot.hear /#streaklife|commit streak/i, (res) ->
     orgLogin = process.env.HUBOT_ORG_LOGIN
     access_token = process.env.HUBOT_ORG_ACCESS_TOKEN
     unless access_token && orgLogin?
