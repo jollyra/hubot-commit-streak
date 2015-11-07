@@ -19,6 +19,7 @@
 Promise = require("bluebird")
 request = Promise.promisify(require("request"))
 _ = require("underscore")
+cheerio = require("cheerio")
 
 module.exports = (robot) ->
   robot.hear /#streaklife|commit streak/i, (res) ->
@@ -52,6 +53,7 @@ module.exports = (robot) ->
       Promise.all(promises).then(() ->
         console.log("what should we have here?")
         console.log("contributions: ", contributions.length)
+        parseContributionSvg(contributions[0])
       )
     )
 
@@ -60,3 +62,8 @@ getContributions = (userLogin, contributions) ->
   return request({uri: "https://github.com/users/#{userLogin}/contributions"}).spread((response, body) ->
     contributions.push(body)
   )
+
+parseContributionSvg = (svg) ->
+	$ = cheerio.load(svg)
+	console.log($.html())
+	return {shit: "goddamn"}
