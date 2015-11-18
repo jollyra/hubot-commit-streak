@@ -18,6 +18,7 @@
 
 var Promise = require("bluebird"),
 	requesting = Promise.promisify(require("request")),
+	cheerio = require("cheerio"),
 	_ = require("lodash");
 
 module.exports = function(robot) {
@@ -38,9 +39,11 @@ module.exports = function(robot) {
 			});
 			return Promise.all(userPromises);
 		}).then(function (contributions) {
-			console.log("contributions: ", contributions.length)
+			console.log("contributions: ", contributions.length);
+			_.each(contributions, function (contribution) {
+				calculateStreak(contribution);
+			});
 		});
-
 	});
 }
 
@@ -64,4 +67,14 @@ function gettingContributions(userLogin) {
 	return requesting(opts).spread(function (response, body) {
 		return body;
 	});
+}
+
+function calculateStreak(contribution) {
+	$ = cheerio.load(contribution);
+	var days = $('rect[class=day]');
+	var streak = _.takeRightWhile(days, function (day) {
+		var commits = cheerio(day).attr('data-count');
+		return parseInt(commits);
+	});
+	console.log(streak.length);
 }
