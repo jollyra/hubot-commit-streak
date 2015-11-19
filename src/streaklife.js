@@ -49,7 +49,7 @@ module.exports = function(robot) {
 
 function gettingMembers(orgLogin, accessToken) {
 	var opts = {
-		uri: "https://api.github.com/orgs/" + orgLogin + "/members",
+		uri: "https://api.github.com/orgs/" + orgLogin + "/members?per_page=100",
 		json: "true",
 		headers: {
 			"accept": "application/json",
