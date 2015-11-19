@@ -41,7 +41,7 @@ module.exports = function(robot) {
 		}).then(function (contributions) {
 			console.log("contributions: ", contributions.length);
 			_.each(contributions, function (contribution) {
-				calculateStreak(contribution);
+				calculateCurrentStreak(contribution);
 			});
 		});
 	});
@@ -69,12 +69,16 @@ function gettingContributions(userLogin) {
 	});
 }
 
-function calculateStreak(contribution) {
+function calculateCurrentStreak(contribution) {
 	$ = cheerio.load(contribution);
 	var days = $('rect[class=day]');
-	var streak = _.takeRightWhile(days, function (day) {
-		var commits = cheerio(day).attr('data-count');
-		return parseInt(commits);
-	});
+	_.last(countCommits(days)) > 0
+		? streak = _.takeRightWhile(days, function (day) { return countCommits(day); })
+		: streak = _.takeRightWhile(_.dropRight(days), function (day) { return countCommits(day); });
 	console.log(streak.length);
+}
+
+function countCommits(xml) {
+	var commits = cheerio(xml).attr('data-count');
+	return parseInt(commits);
 }
