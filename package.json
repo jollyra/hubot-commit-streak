@@ -1,10 +1,10 @@
 {
   "name": "hubot-streak-podium",
-  "description": "A hubot script that shows who has the longest github streak in your org",
-  "version": "0.0.3",
+  "description": "A hubot script that shows who has the longest commit streak in your org",
+  "version": "1.0.0",
   "author": "Nigel Rahkola <me@nigelrahkola.com>",
   "license": "MIT",
-  "keywords": "hubot, hubot-scripts, github streak",
+  "keywords": "hubot, hubot-scripts, github streak, streaklife, commit, commit streak",
   "repository": {
     "type": "git",
     "url": "git://github.com/hubot-scripts/hubot-streak-podium.git"
