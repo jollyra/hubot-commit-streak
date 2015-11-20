@@ -7,10 +7,10 @@
   "keywords": "hubot, hubot-scripts, github streak, streaklife, commit, commit streak",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hubot-scripts/hubot-streak-podium.git"
+    "url": "git://github.com/hubot-scripts/hubot-commit-streak.git"
   },
   "bugs": {
-    "url": "https://github.com/hubot-scripts/hubot-streak-podium/issues"
+    "url": "https://github.com/hubot-scripts/hubot-commit-streak/issues"
   },
   "dependencies": {
     "bluebird": "^3.0.5",
