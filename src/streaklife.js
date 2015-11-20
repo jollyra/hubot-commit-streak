@@ -5,6 +5,12 @@
 //   HUBOT_ORG_ACCESS_TOKEN
 //   HUBOT_ORG_LOGIN
 //
+// Dependencies:
+//   "bluebird": "~2.7.1",
+//   "cheerio": "^0.19.0",
+//   "lodash": "^3.10.1",
+//   "request": "^2.63.0"
+//
 // Commands:
 //   #streaklife - <Gets a list of the longest github commit streaks in your org>
 //   commit streak - <Gets a list of the longest github commit streaks in your org>
