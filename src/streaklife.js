@@ -22,7 +22,7 @@ var Promise = require("bluebird"),
 	_ = require("lodash");
 
 module.exports = function(robot) {
-	robot.hear(/#streaklife|commit streak|test/i, function(res) {
+	robot.hear(/#streaklife|commit streak/i, function(res) {
 		var orgLogin = process.env.HUBOT_ORG_LOGIN;
 		var accessToken = process.env.HUBOT_ORG_ACCESS_TOKEN;
 		if (!orgLogin || !accessToken) {
