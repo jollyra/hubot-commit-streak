@@ -44,6 +44,7 @@ module.exports = function(robot) {
 					liveStreak: calculateLiveStreak(contribution.contribs)
 				};
 			});
+			report(res, streaks);
 		});
 	});
 }
@@ -66,20 +67,25 @@ function gettingMembers(orgLogin, accessToken) {
 function gettingContributions(userLogin) {
 	var opts = { uri: "https://github.com/users/" + userLogin + "/contributions" };
 	return requesting(opts).spread(function (response, body) {
-		return body;
+		return { user: userLogin, contribs: body };
 	});
 }
 
-function calculateCurrentStreak(contribution) {
+function calculateLiveStreak(contribution) {
 	$ = cheerio.load(contribution);
 	var days = $('rect[class=day]');
 	countCommits(_.last(days)) > 0
 		? streak = _.takeRightWhile(days, function (day) { return countCommits(day); })
 		: streak = _.takeRightWhile(_.dropRight(days), function (day) { return countCommits(day); });
-	console.log(streak.length);
+	return streak.length;
 }
 
 function countCommits(xml) {
 	var commits = cheerio(xml).attr('data-count');
 	return parseInt(commits);
+}
+
+function report(res, streaks) {
+	streaks = _.take(_.sortByOrder(streaks, function (streak) { return streak.liveStreak; }, ['desc']), 7);
+	_.each(streaks, function (streak) { res.send(streak.user + " " + streak.liveStreak); });
 }
