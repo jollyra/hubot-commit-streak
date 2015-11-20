@@ -29,7 +29,6 @@ module.exports = function(robot) {
 			res.send(":( I require HUBOT_ORG_ACCESS_TOKEN and HUBOT_ORG_LOGIN");
 			return;
 		}
-
 		gettingMembers(orgLogin, accessToken).then(function (users) {
 			if (_.isEmpty(users)) { res.send(":( I couldn't find any users"); }
 			return users;
@@ -72,7 +71,7 @@ function gettingContributions(userLogin) {
 function calculateCurrentStreak(contribution) {
 	$ = cheerio.load(contribution);
 	var days = $('rect[class=day]');
-	_.last(countCommits(days)) > 0
+	countCommits(_.last(days)) > 0
 		? streak = _.takeRightWhile(days, function (day) { return countCommits(day); })
 		: streak = _.takeRightWhile(_.dropRight(days), function (day) { return countCommits(day); });
 	console.log(streak.length);
