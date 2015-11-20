@@ -38,9 +38,11 @@ module.exports = function(robot) {
 			});
 			return Promise.all(userPromises);
 		}).then(function (contributions) {
-			console.log("contributions: ", contributions.length);
-			_.each(contributions, function (contribution) {
-				calculateCurrentStreak(contribution);
+			var streaks = _.map(contributions, function (contribution) {
+				return {
+					user: contribution.user,
+					liveStreak: calculateLiveStreak(contribution.contribs)
+				};
 			});
 		});
 	});
