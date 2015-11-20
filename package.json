@@ -1,5 +1,5 @@
 {
-  "name": "hubot-streak-podium",
+  "name": "hubot-commit-streak",
   "description": "A hubot script that shows who has the longest commit streak in your org",
   "version": "1.0.0",
   "author": "Nigel Rahkola <me@nigelrahkola.com>",
