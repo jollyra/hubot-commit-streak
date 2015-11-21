@@ -87,5 +87,6 @@ function countCommits(xml) {
 
 function report(res, streaks) {
 	streaks = _.take(_.sortByOrder(streaks, function (streak) { return streak.liveStreak; }, ['desc']), 7);
-	_.each(streaks, function (streak) { res.send(streak.user + " " + streak.liveStreak); });
+	var out = _.foldl(streaks, function (str, streak) { return str + streak.user + " " + streak.liveStreak + "\n"; }, "");
+	res.send(out);
 }
