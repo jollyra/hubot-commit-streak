@@ -1,7 +1,7 @@
 {
   "name": "hubot-commit-streak",
   "description": "A hubot script that shows who has the longest commit streak in your org",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Nigel Rahkola <me@nigelrahkola.com>",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts, github streak, streaklife, commit, commit streak",
@@ -17,9 +17,6 @@
     "cheerio": "^0.19.0",
     "lodash": "^3.10.1",
     "request": "^2.63.0"
-  },
-  "peerDependencies": {
-    "hubot": "2.x"
   },
   "devDependencies": {
     "chai": "^2.1.1",
