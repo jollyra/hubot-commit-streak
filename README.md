@@ -1,12 +1,12 @@
-# hubot-streak-podium
+# hubot-commit-streak
 
-A hubot script that shows who has the longest commit streak in your org
+A hubot script that shows who has the best current commit streak in your org
 
-See [`src/streaklife.js`](src/streaklife) for full documentation.
+See [`src/streaklife.js`](src/streaklife.js) for full documentation.
 
 ## Installation
 
-In hubot project repo, run:
+In your hubot project repo, run:
 
 `npm install hubot-commit-streak --save`
 
@@ -33,12 +33,4 @@ hubot>> #streaklife, baby
         redleader: 12
         redthree: 10
         redsix: 3
-
-## Local Testing
-
-1 mkdir streakbot
-2 cd streakbot
-3 yo hubot
-4 follow the yo instructions
-5 run streakbot with >bin/hubot
-6 try a command like >commit streak
+```
