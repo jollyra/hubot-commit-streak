@@ -41,7 +41,7 @@ module.exports = function(robot) {
 			var streaks = _.map(contributions, function (contribution) {
 				return {
 					user: contribution.user,
-					liveStreak: calculateLiveStreak(contribution.contribs)
+					currentStreak: calcCurrentStreak(contribution.contribs)
 				};
 			});
 			report(res, streaks);
@@ -71,7 +71,7 @@ function gettingContributions(userLogin) {
 	});
 }
 
-function calculateLiveStreak(contribution) {
+function calcCurrentStreak(contribution) {
 	$ = cheerio.load(contribution);
 	var days = $('rect[class=day]');
 	countCommits(_.last(days)) > 0
@@ -86,7 +86,8 @@ function countCommits(xml) {
 }
 
 function report(res, streaks) {
-	streaks = _.take(_.sortByOrder(streaks, function (streak) { return streak.liveStreak; }, ['desc']), 7);
-	var out = _.foldl(streaks, function (str, streak) { return str + streak.user + " " + streak.liveStreak + "\n"; }, "");
-	res.send(out);
+	streaks = _.take(_.sortByOrder(streaks, function (streak) { return streak.currentStreak; }, ['desc']), 7);
+	var out = _.foldl(streaks, function (str, streak) { return str + streak.user + " " + streak.currentStreak + "\n"; }, "");
+	var title = "Top 7 Current Streaks\n";
+	res.send(title + out);
 }
