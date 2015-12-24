@@ -88,6 +88,6 @@ function countCommits(xml) {
 function report(res, streaks) {
 	streaks = _.take(_.sortByOrder(streaks, function (streak) { return streak.currentStreak; }, ['desc']), 7);
 	var out = _.foldl(streaks, function (str, streak) { return str + streak.user + " " + streak.currentStreak + "\n"; }, "");
-	var title = "Top 7 Current Streaks\n";
+	var title = "\nTop live public commit streaks:\n";
 	res.send(title + out);
 }
